@@ -9,7 +9,7 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        with open('phones.csv', 'r') as file:
+        with open('phones.csv', 'r', encoding='utf-8') as file:
             phones = list(csv.DictReader(file, delimiter=';'))
 
         for phone in phones:
@@ -19,6 +19,5 @@ class Command(BaseCommand):
                 price = phone['price'],
                 image = phone['image'],
                 release_date = phone['release_date'],
-                lte_exists = phone['lte_exists'],
-                slug = slug)
+                lte_exists = phone['lte_exists'])
             p.save()
