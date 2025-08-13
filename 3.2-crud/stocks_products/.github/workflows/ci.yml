@@ -7,7 +7,7 @@ jobs:
   testing:
     runs-on: ubuntu-latest
     env:
-      SECRET_KEY: ${{ secrets.SECRET }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: ${{ secrets.DEBUG_MODE }}
       ALLOWED: ${{ secrets.ALLOWED_HOSTS }}
       DB_ENGINE: ${{ secrets.DB_ENGINE }}
@@ -18,7 +18,7 @@ jobs:
       DB_PORT: ${{ secrets.DB_PORT }}
     services:
       postgresql_main:
-        image: postgres-12
+        image: postgres:12
         env:
           POSTGRES_DB: ${{ env.DB_NAME }}
           POSTGRES_USER: ${{ env.DB_USER }}
@@ -48,7 +48,7 @@ jobs:
       - name: Тестирование
         run: python manage.py test
         env:
-          SECRET_KEY: ${{ env.SECRET }}
+          SECRET_KEY: ${{ env.SECRET_KEY }}
           DEBUG: ${{ env.DEBUG }}
           ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
           DB_ENGINE: ${{ env.DB_ENGINE }}
